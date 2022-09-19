@@ -17,35 +17,42 @@ app.get('/', (req,res) => {
   <a href="/cds"><button>Go CDS</button></a>
   `);
 });
+
 //albums route
 app.get('/cds',(req,res) => {
   let htmlStr = '';
-  htmlStr += `<ul>`;
+  htmlStr += `<table style="width:100%;border:1px solid #ccc">`;
   db.map(cd => {
-    htmlStr += `<li><a href="/cds/${cd.name}">${cd.name}</a></li>`
+    htmlStr += `<tr><th style="padding:10px;background-color:#eee"><a href="/cds/${cd.name}">${cd.name}</a></th></tr>`
   });
-  htmlStr += `</ul>`
-  htmlStr += `<a href="/"><button>Go Home</button></a>`
+  htmlStr += `</table>`
+  htmlStr += `<a href="/"><button style="width:100%">Go Home</button></a>`
   res.send(htmlStr);
 });
+
 //cd route
 app.get('/cds/:handle', (req,res) => {
   const { handle } = req.params;
   const cd = db.find(person => person.name === handle);
   if(cd) {
     let htmlData = "";
-    htmlData += `<h1>${cd.name}</h1>`;
-    htmlData += `<img src="/${cd.imgURL}" width="200" height="200"/>`;
-    htmlData += `<h3>publish Date: ${cd.publishDate}</h3>`;
-    htmlData += `<h3>artist: ${cd.artist}</h3>`;
-    htmlData += `<h3>Songs:</h3>
-                <ul>  
-                  <li>${cd.songTitles[0]}</li>
-                  <li>${cd.songTitles[1]}</li>
-                  <li>${cd.songTitles[2]}</li>
-                  <li>${cd.songTitles[3]}</li>
-                </ul>`
-    htmlData += `<a href="/cds"><button>Go back</button></a>`;
+    htmlData += `<h1 style="text-align:center;">${cd.name}</h1>`;
+    htmlData += `<img src="/${cd.imgURL}" width="200" height="200" style="padding-left:43%"/>`;
+    htmlData += `<table style="width:100%;border:1px solid #ccc">`
+    htmlData += `<tr><th style="padding:10px;background-color:#eee">publish Date: ${cd.publishDate}</th></tr>`;
+    htmlData += `<tr><th style="padding:10px;background-color:#eee">artist: ${cd.artist}</th></tr>`;
+    htmlData += `<tr> 
+                  <th style="padding:10px;background-color:#eee">
+                    <ul style="list-style:none;">Songs: 
+                      <li >${cd.songTitles[0]}</li>
+                      <li>${cd.songTitles[1]}</li>
+                      <li>${cd.songTitles[2]}</li>
+                      <li>${cd.songTitles[3]}</li>
+                    </ul>  
+                  </th> 
+                </tr>`
+    htmlData += `</table>`
+    htmlData += `<a href="/cds"><button style="width:100%">Go back</button></a>`;
     res.send(htmlData);
 
   }else {
