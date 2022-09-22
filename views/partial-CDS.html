@@ -1,0 +1,5 @@
+<h1>${title}</h1>
+<table style="width:100%;border:1px solid #ccc">
+${data.map(cd => `<tr><th><a href="/cds/${cd.name}">${cd.name}</a></th></tr>`).join('')}
+</table>
+<a href="/"><button style="width:100%">Go Home</button></a>
