@@ -1,0 +1,17 @@
+<h1>${title}</h1>
+<img src="/${data.imgURL}" width="200" height="200" style="padding-left:43%"/>
+<table style="width:100%;border:1px solid #ccc">
+  <tr><th style="padding:10px;background-color:#eee">publish Date: ${data.publishDate}</th></tr>
+  <tr><th style="padding:10px;background-color:#eee">artist: ${data.artist}</th></tr>
+  <tr> 
+    <th style="padding:10px;background-color:#eee">
+      <ul style="list-style:none;">Songs: 
+        <li >${data.songTitles[0]}</li>
+        <li>${data.songTitles[1]}</li>
+        <li>${data.songTitles[2]}</li>
+        <li>${data.songTitles[3]}</li>
+      </ul>  
+    </th> 
+  </tr>
+</table>
+<a href="/cds"><button style="width:100%">Go back</button></a>
